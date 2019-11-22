@@ -162,11 +162,8 @@ class Rover {
         }
         break;
       case 'S':
-        console.log(this.position.r);
-        console.log(this.planet.board[this.position.r][0].o);
-        if (this.position.r + 1 <= this.planet.board.length ) {
+        if (this.position.r + 1 <= this.planet.board.length) {
           this.position.r++;
-          console.log(this.position.r);
           const newPosition = { r: this.position.r, c: this.position.c };
           this.travelLog.push(newPosition);
           console.log(

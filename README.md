@@ -21,13 +21,14 @@ Eu tentei organizar sempre pensando em como tornar o código reutilizável e fá
 
 
 
-# H2 status:
-bugs: não achei nenhum
+# H1 status:
 iterações de 1 até 5 concluídas.
-bonus de 1 até 3 concluídas
+bonus de 1 até 3 concluídas.
+leia-me tem orientacoes de obstaculos no Planet, mas ainda nao esta funcionando!
 
 # H2 to-do:
 - bonus 4: obstáculos
+  - colocar identificacao de obstaculos nas funcoes foward e backward
   - melhorar validacao de input da probabilidade
 - bonus 4: other rovers // 
 - getters interessantes. p.ex.: status, ou um travel log mais legal..
