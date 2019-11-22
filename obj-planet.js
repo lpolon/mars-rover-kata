@@ -1,6 +1,3 @@
-const Rover = require('./obj-rover');
-
-// create board (custom size)
 class Planet {
   constructor(name, numOfRows, numOfColumns) {
     // check parameters
