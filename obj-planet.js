@@ -1,10 +1,12 @@
+const Rover = require('./obj-rover');
+
 // create board (custom size)
 class Planet {
   constructor(name, numOfRows, numOfColumns) {
     // check parameters
     if (
-      typeof numOfRows === 'undefined' ||
-      typeof numOfColumns === 'undefined'
+      typeof numOfRows === 'undefined'
+      || typeof numOfColumns === 'undefined'
     ) {
       console.log(
         `error: number or Rows or Columns was undefined. Please declare it`

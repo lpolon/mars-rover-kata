@@ -10,6 +10,12 @@ const mars = new Planet( 'mars', 10, 10 )
 p. ex.:
 const curiosity = new Rover( 'curiosity', mars )
 
+3) mova sua sonda usando: [rover-name].inputcommands();
+inputs validos: f, b, r, l. podem ser passados como:
+a) 'ffffbbb'
+b) 'f', 'b', 'r', ...
+ou qualquer combinacao das duas
+
 # H2 Intro
 Eu tentei organizar sempre pensando em como tornar o código reutilizável e fácil de entender. Tentei utilizar as coisas que eu aprendi no material da Ironhack e também no que eu já tinha estudado pelo codeAcademy. Por favor, não deixem de me explicar o que não faz sentido na forma de organizar, maus hábitos, etc... Obrigado!
 

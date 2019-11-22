@@ -1,3 +1,6 @@
+const Planet = require('./obj-planet');
+const options = require('./build');
+
 // create player object and where it will be placed
 class Rover {
   constructor(name, planet) {
