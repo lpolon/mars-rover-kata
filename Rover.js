@@ -1,14 +1,13 @@
-const Planet = require('./obj-planet');
-const options = require('./build');
-
+/* eslint-disable no-underscore-dangle */
 // create player object and where it will be placed
 class Rover {
-  constructor(name, planet) {
+  constructor(name, planet, msg) {
     this.name = name;
     this._direction = 'N'; // there is a setter to change this property
     this.position = { r: 0, c: 0 };
     this.travelLog = [{ r: 0, c: 0 }];
     this.planet = planet;
+    this.msg = msg;
   }
 
   set direction(newDirection) {
@@ -34,7 +33,7 @@ class Rover {
     });
     const flattenedNewInputArr = newInputArr.flat(1);
 
-    if (options.blockBadInputs) {
+    if (msg.blockBadInputs) {
       if (
         flattenedNewInputArr.every(e => {
           return ['f', 'b', 'l', 'r'].includes(e);
@@ -51,7 +50,7 @@ class Rover {
           ]}`
         );
       }
-    } else if (!options.blockBadInputs) {
+    } else if (!msg.blockBadInputs) {
       const filteredflattenedNewInputArr = [];
       const removedInputValues = [];
       flattenedNewInputArr.forEach(e => {
@@ -77,16 +76,12 @@ class Rover {
       console.log('input: ' + e);
       if (e === 'f') {
         this._moveFoward();
-        return;
       } else if (e === 'b') {
         this._moveBackward();
-        return;
       } else if (e === 'l') {
         this._turnLeft();
-        return;
       } else if (e === 'r') {
         this._turnRight();
-        return;
       }
     });
     return 'end of routine';
@@ -144,7 +139,7 @@ class Rover {
           );
         } else {
           console.log(
-            `The ${this.name} rover didn't move northward. position: r = ${this.position.r}, c = ${this.position.c} ${options.outOfBoundsMsg}`
+            `The ${this.name} rover didn't move northward. position: r = ${this.position.r}, c = ${this.position.c} ${msg.outOfBoundsMsg}`
           );
         }
         break;
@@ -158,7 +153,7 @@ class Rover {
           );
         } else {
           console.log(
-            `The ${this.name} rover didn't move westward. position: r = ${this.position.r}, c = ${this.position.c} ${options.outOfBoundsMsg}`
+            `The ${this.name} rover didn't move westward. position: r = ${this.position.r}, c = ${this.position.c} ${msg.outOfBoundsMsg}`
           );
         }
         break;
@@ -171,7 +166,7 @@ class Rover {
             `The ${this.name} rover moved southward. position: r = ${this.position.r}, c = ${this.position.c}`
           );
         } else {
-          `The ${this.name} rover didn't move southward. position: r = ${this.position.r}, c = ${this.position.c} ${options.outOfBoundsMsg}`;
+          `The ${this.name} rover didn't move southward. position: r = ${this.position.r}, c = ${this.position.c} ${msg.outOfBoundsMsg}`;
         }
         break;
       case 'E':
@@ -184,7 +179,7 @@ class Rover {
           );
         } else {
           console.log(
-            `The ${this.name} rover didn't move eastward. position: r = ${this.position.r}, c = ${this.position.c} ${options.outOfBoundsMsg}`
+            `The ${this.name} rover didn't move eastward. position: r = ${this.position.r}, c = ${this.position.c} ${msg.outOfBoundsMsg}`
           );
         }
         break;
@@ -202,7 +197,7 @@ class Rover {
             `The ${this.name} rover moved, in reverse, southward. position: r = ${this.position.r}, c = ${this.position.c}`
           );
         } else {
-          `The ${this.name} rover couldn't go further. position: r = ${this.position.r}, c = ${this.position.c} ${options.outOfBoundsMsg}`;
+          `The ${this.name} rover couldn't go further. position: r = ${this.position.r}, c = ${this.position.c} ${msg.outOfBoundsMsg}`;
         }
         break;
       case 'W':
@@ -215,7 +210,7 @@ class Rover {
           );
         } else {
           console.log(
-            `The ${this.name} rover couldn't go further. position: r = ${this.position.r}, c = ${this.position.c} ${options.outOfBoundsMsg}`
+            `The ${this.name} rover couldn't go further. position: r = ${this.position.r}, c = ${this.position.c} ${msg.outOfBoundsMsg}`
           );
         }
         break;
@@ -229,7 +224,7 @@ class Rover {
           );
         } else {
           console.log(
-            `The ${this.name} rover couldn't go further. position: r = ${this.position.r}, c = ${this.position.c} ${options.outOfBoundsMsg}`
+            `The ${this.name} rover couldn't go further. position: r = ${this.position.r}, c = ${this.position.c} ${msg.outOfBoundsMsg}`
           );
         }
         break;
@@ -243,7 +238,7 @@ class Rover {
           );
         } else {
           console.log(
-            `The ${this.name} rover couldn't go further. position: r = ${this.position.r}, c = ${this.position.c} ${options.outOfBoundsMsg}`
+            `The ${this.name} rover couldn't go further. position: r = ${this.position.r}, c = ${this.position.c} ${msg.outOfBoundsMsg}`
           );
         }
         break;

@@ -1,3 +1,5 @@
+const aux = require('./aux');
+
 class Planet {
   constructor(name, numOfRows, numOfColumns) {
     // check parameters

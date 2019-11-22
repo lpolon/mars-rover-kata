@@ -1,7 +1,9 @@
 // import classes
 
-const Planet = require('./obj-planet');
-const Rover = require('./obj-rover');
+const Planet = require('./Planet');
+const Rover = require('./Rover');
+const aux = require('./aux');
+console.log(aux.randomIntegerInRange(5, 15));
 
 // game options
 const options = {
@@ -10,13 +12,13 @@ const options = {
 };
 
 const mars = new Planet('Mars', 10, 10);
-const curiosity = new Rover('Curiosity', mars);
+const curiosity = new Rover('Curiosity', mars, options);
 
-console.log('>');
+// console.log(mars.board);
 
-curiosity.inputCommands('rflrffffbbbb');
-console.log(curiosity.travelLog);
+// console.log('>');
+
+// curiosity.inputCommands('rflrffffbbbb');
+// console.log(curiosity.travelLog);
 
 console.log(new Date().toLocaleString());
-
-module.exports = options;
