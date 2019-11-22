@@ -1,43 +1,3 @@
-// game options
-const options = {
-  outOfBoundsMsg: '\n YOU MUST GATHER YOUR PARTY BEFORE VENTURING FORTH', // this is a quote from Baldur's gate. It doesn't make a lot of sense here. You just hear it a lot while you are "stuck" in the border of the screen waiting for your party xD
-  blockBadInputs: false // false: invalid inputs are skipped and logged. true: ._parseInput() throws error
-};
-
-// create board (custom size)
-class Planet {
-  constructor(name, numOfRows, numOfColumns) {
-    // check parameters
-    if (
-      typeof numOfRows === 'undefined' ||
-      typeof numOfColumns === 'undefined'
-    ) {
-      console.log(
-        `error: number or Rows or Columns was undefined. Please declare it`
-      );
-      throw `number or Rows or Columns was undefined. Please declare it`;
-    }
-    if (numOfRows < 3 && numOfColumns < 3) {
-      // console.log(`number of Rows and columns must be higher than 2!`)
-      console.log(`error: number of Rows and columns must be higher than 2`);
-      // eu não consegui catch(e) {console.error(e)} isso aqui.
-      throw `number of Rows and columns must be higher than 2`;
-    }
-    const createBoard = (numOfRows, numOfColumns) => {
-      const board = [];
-      for (let i = 0; i < numOfRows; i++) {
-        const rowArr = [];
-        for (let j = 0; j < numOfColumns; j++) {
-          rowArr.push({ r: i, c: j });
-        }
-        board.push(rowArr);
-      }
-      return board;
-    };
-    this.board = createBoard(numOfRows, numOfColumns);
-    this.name = name;
-  }
-}
 // create player object and where it will be placed
 class Rover {
   constructor(name, planet) {
@@ -47,6 +7,7 @@ class Rover {
     this.travelLog = [{ r: 0, c: 0 }];
     this.planet = planet;
   }
+
   set direction(newDirection) {
     if (
       ['N', 'S', 'E', 'W'].includes(newDirection) &&
@@ -57,6 +18,7 @@ class Rover {
       console.log('invalid input for direction assignment');
     }
   }
+
   _parseInput(inputArr) {
     const newInputArr = [];
     // split strings
@@ -105,6 +67,7 @@ class Rover {
       return filteredflattenedNewInputArr;
     }
   }
+
   inputCommands(...newInput) {
     const parsedInputArr = this._parseInput(newInput);
     parsedInputArr.forEach(e => {
@@ -125,6 +88,7 @@ class Rover {
     });
     return 'end of routine';
   }
+
   _turnLeft() {
     switch (this._direction) {
       case 'N':
@@ -144,6 +108,7 @@ class Rover {
       `The ${this.name} rover turned left and is now facing: ${this._direction}`
     );
   }
+
   _turnRight() {
     switch (this._direction) {
       case 'N':
@@ -163,6 +128,7 @@ class Rover {
       `The ${this.name} rover turned right and is now facing: ${this._direction}`
     );
   }
+
   _moveFoward() {
     switch (this._direction) {
       case 'N':
@@ -221,6 +187,7 @@ class Rover {
         break;
     }
   }
+
   _moveBackward() {
     switch (this._direction) {
       case 'N':
@@ -279,15 +246,6 @@ class Rover {
         break;
     }
   }
-} // end of Rover Class
+}
 
-const mars = new Planet('Mars', 10, 10);
-const curiosity = new Rover('Curiosity', mars);
-
-console.log('>');
-
-curiosity.inputCommands('rflrffffbbbb');
-curiosity.inputCommands('fffffffffffffffffffffffffffffffllllll', 'r', 'l');
-console.log(curiosity.travelLog);
-
-console.log(new Date().toLocaleString());
+module.exports = Rover;
