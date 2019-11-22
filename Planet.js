@@ -1,4 +1,4 @@
-const aux = require('./aux');
+const helper = require('./helper');
 
 class Planet {
   constructor(name, numOfRows, numOfColumns) {
