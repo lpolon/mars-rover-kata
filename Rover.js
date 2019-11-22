@@ -1,3 +1,8 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable default-case */
+/* eslint-disable prefer-template */
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
 // create player object and where it will be placed
 class Rover {
   constructor(name, planet, msg) {
@@ -8,6 +13,7 @@ class Rover {
     this.planet = planet;
     this.msg = msg;
   }
+
   set direction(newDirection) {
     if (
       ['N', 'S', 'E', 'W'].includes(newDirection) &&
@@ -156,8 +162,11 @@ class Rover {
         }
         break;
       case 'S':
-        if (this.position.r + 1 <= this.planet.board.length) {
+        console.log(this.position.r);
+        console.log(this.planet.board[this.position.r][0].o);
+        if (this.position.r + 1 <= this.planet.board.length ) {
           this.position.r++;
+          console.log(this.position.r);
           const newPosition = { r: this.position.r, c: this.position.c };
           this.travelLog.push(newPosition);
           console.log(
