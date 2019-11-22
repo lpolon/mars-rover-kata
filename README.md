@@ -2,9 +2,9 @@
 
 # H1 como usar:
 1) crie o seu tabuleiro declarando uma nova instancia de objeto.
-new Planet( string com nome da sonda, quantidade de linhas, quantidade de colunas );
+new Planet( string com nome da sonda, quantidade de linhas, quantidade de colunas, probabilidade de obstaculos - numero de 0 a 100 );
 p. ex.:
-const mars = new Planet( 'mars', 10, 10 )
+const mars = new Planet( 'mars', 10, 10, 30 )
 
 2) crie sua sonda com o nome da sonda (string) e o planeta em que ela esta (objeto).
 p. ex.:
@@ -28,6 +28,7 @@ bonus de 1 até 3 concluídas
 
 # H2 to-do:
 - bonus 4: obstáculos
+  - melhorar validacao de input da probabilidade
 - bonus 4: other rovers // 
 - getters interessantes. p.ex.: status, ou um travel log mais legal..
 

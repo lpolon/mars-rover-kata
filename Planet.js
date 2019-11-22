@@ -1,8 +1,11 @@
 const helper = require('./helper');
 
 class Planet {
-  constructor(name, numOfRows, numOfColumns) {
+  constructor(name, numOfRows, numOfColumns, prob) {
     // check parameters
+    if (typeof prob === 'undefined') {
+      prob = 0;
+    }
     if (
       typeof numOfRows === 'undefined'
       || typeof numOfColumns === 'undefined'
@@ -23,7 +26,11 @@ class Planet {
       for (let i = 0; i < numOfRows; i++) {
         const rowArr = [];
         for (let j = 0; j < numOfColumns; j++) {
-          rowArr.push({ r: i, c: j });
+          if (prob >= helper.randomIntegerInRange(0, 100)) {
+            rowArr.push({ r: i, c: j, o: true });
+          } else {
+            rowArr.push({ r: i, c: j, o: false });
+          }
         }
         board.push(rowArr);
       }
