@@ -1,22 +1,3 @@
-/*
-Eu tentei organizar sempre pensando em como tornar o código reutilizável e fácil de entender. Tentei utilizar as coisas que eu aprendi no material da Ironhack e também no que eu já tinha estudado pelo codeAcademy. Por favor, não deixem de me explicar o que não faz sentido na forma de organizar, maus hábitos, etc... Obrigado!
-*/
-
-/*
-status:
-bugs: não achei nenhum
-iterações de 1 até 5 concluídas.
-bonus de 1 até 3 concluídas
-
-to-do:
-- bonus 4: obstáculos
-- bonus 4: other rovers // 
-- getters interessantes. p.ex.: status, ou um travel log mais legal..
-
-method ._checkColision()
-how to make many players move at the same time?
-*/
-
 // game options
 const options = {
   outOfBoundsMsg: '\n YOU MUST GATHER YOUR PARTY BEFORE VENTURING FORTH', // this is a quote from Baldur's gate. It doesn't make a lot of sense here. You just hear it a lot while you are "stuck" in the border of the screen waiting for your party xD
