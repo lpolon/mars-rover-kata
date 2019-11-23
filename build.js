@@ -10,11 +10,13 @@ const options = {
   blockBadInputs: false, // false: invalid inputs are skipped and logged. true: ._parseInput() throws error
 };
 
-const mars = new Planet('Mars', 5, 5, 70);
+const mars = new Planet('Mars', 3, 3, 0);
 const curiosity = new Rover('Curiosity', mars, options);
 console.log('>');
 
-curiosity.inputCommands('rrf');
-// console.log(curiosity.travelLog);
+console.log('mars.board: \n',mars.board);
+console.log('curiosity.position: \n',curiosity.position);
+curiosity.inputCommands('rrfffffffffffffff');
+console.log(curiosity.travelLog);
 
 console.log(new Date().toLocaleString());

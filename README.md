@@ -35,3 +35,5 @@ leia-me tem orientacoes de obstaculos no Planet, mas ainda nao esta funcionando!
 
 method ._checkColision()
 how to make many players move at the same time?
+
+# H3 anotacoes temp

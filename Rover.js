@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-plusplus */
 /* eslint-disable default-case */
 /* eslint-disable prefer-template */
@@ -162,15 +163,23 @@ class Rover {
         }
         break;
       case 'S':
-        if (this.position.r + 1 <= this.planet.board.length) {
-          this.position.r++;
-          const newPosition = { r: this.position.r, c: this.position.c };
-          this.travelLog.push(newPosition);
-          console.log(
-            `The ${this.name} rover moved southward. position: r = ${this.position.r}, c = ${this.position.c}`
-          );
+        if (this.position.r + 1 < this.planet.board.length) {
+          if (this.planet.board[this.position.r + 1][0].o === false) {
+            this.position.r++;
+            const newPosition = { r: this.position.r, c: this.position.c };
+            this.travelLog.push(newPosition);
+            console.log(
+              `The ${this.name} rover moved southward. position: r = ${this.position.r}, c = ${this.position.c}`
+            );
+          } else {
+            console.log(
+              `The ${this.name} rover found a obstacle and can't move on. position: r = ${this.position.r}, c = ${this.position.c}`
+            );
+          }
         } else {
-          `The ${this.name} rover didn't move southward. position: r = ${this.position.r}, c = ${this.position.c} ${this.msg.outOfBoundsMsg}`;
+          console.log(
+            `The ${this.name} rover didn't move southward. position: r = ${this.position.r}, c = ${this.position.c} ${this.msg.outOfBoundsMsg}`
+          );
         }
         break;
       case 'E':
