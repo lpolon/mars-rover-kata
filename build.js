@@ -16,7 +16,7 @@ console.log('>');
 
 console.log('mars.board: \n',mars.board);
 console.log('curiosity.position: \n',curiosity.position);
-curiosity.inputCommands('rrfffffffffffffff');
+curiosity.inputCommands('rffff');
 console.log(curiosity.travelLog);
 
 console.log(new Date().toLocaleString());

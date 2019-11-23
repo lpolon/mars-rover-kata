@@ -183,7 +183,7 @@ class Rover {
         }
         break;
       case 'E':
-        if (this.position.c + 1 <= this.planet.board[0].length) {
+        if (this.position.c + 1 < this.planet.board[0].length) {
           this.position.c++;
           const newPosition = { r: this.position.r, c: this.position.c };
           this.travelLog.push(newPosition);
