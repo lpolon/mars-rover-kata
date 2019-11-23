@@ -135,7 +135,7 @@ class Rover {
   _moveFoward() {
     switch (this._direction) {
       case 'N':
-        if (this.position.r - 1 >= 0) {
+        if (this.position.r - 1 > 0) {
           this.position.r--;
           const newPosition = { r: this.position.r, c: this.position.c };
           this.travelLog.push(newPosition);
@@ -202,7 +202,7 @@ class Rover {
   _moveBackward() {
     switch (this._direction) {
       case 'N':
-        if (this.position.r + 1 <= this.planet.board.length) {
+        if (this.position.r + 1 < this.planet.board.length) {
           this.position.r++;
           const newPosition = { r: this.position.r, c: this.position.c };
           this.travelLog.push(newPosition);
@@ -214,7 +214,7 @@ class Rover {
         }
         break;
       case 'W':
-        if (this.position.c + 1 <= this.planet.board[0].length) {
+        if (this.position.c + 1 < this.planet.board[0].length) {
           this.position.c++;
           const newPosition = { r: this.position.r, c: this.position.c };
           this.travelLog.push(newPosition);
