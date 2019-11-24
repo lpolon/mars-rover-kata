@@ -5,6 +5,9 @@
 /* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 // create player object and where it will be placed
+
+const helper = require('./helper');
+
 class Rover {
   constructor(name, planet, msg) {
     this.name = name;
@@ -80,9 +83,9 @@ class Rover {
     parsedInputArr.forEach(e => {
       console.log('input: ' + e);
       if (e === 'f') {
-        this._moveFoward();
+        this._moveFoward(this._direction);
       } else if (e === 'b') {
-        this._moveBackward();
+        this._moveBackward(this._direction);
       } else if (e === 'l') {
         this._turnLeft();
       } else if (e === 'r') {
@@ -132,30 +135,54 @@ class Rover {
     );
   }
 
-  _moveFoward() {
-    switch (this._direction) {
+  _moveFoward(cardinalDirection) {
+    switch (cardinalDirection) {
       case 'N':
         if (this.position.r - 1 > 0) {
-          this.position.r--;
-          const newPosition = { r: this.position.r, c: this.position.c };
-          this.travelLog.push(newPosition);
-          console.log(
-            `The ${this.name} rover moved northward. position: r = ${this.position.r}, c = ${this.position.c}`
-          );
+          if (this.planet.board[this.position.r - 1][0].o === false) {
+            this.position.r--;
+            const newPosition = { r: this.position.r, c: this.position.c };
+            this.travelLog.push(newPosition);
+            console.log(
+              `The ${this.name} rover moved northward. position: r = ${this.position.r}, c = ${this.position.c}`
+            );
+          } else {
+            console.log(
+              `The ${this.name} rover found a obstacle ahead at r = ${
+                this.planet.board[0][this.position.c + 1].r
+              }, c = ${
+                this.planet.board[0][this.position.c + 1].c
+              } and can't move on. ${this.name}'s position: r = ${
+                this.position.r
+              }, c = ${this.position.c}`
+            );
+          }
         } else {
           console.log(
-            `The ${this.name} rover didn't move northward. position: r = ${this.position.r}, c = ${this.position.c} ${this.msg.outOfBoundsMsg}`
+            helper.logPathBlock(cardinalDirection, this.name, this.position.r, this.position.c)
           );
         }
         break;
       case 'W':
         if (this.position.c - 1 >= 0) {
-          this.position.c--;
-          const newPosition = { r: this.position.r, c: this.position.c };
-          this.travelLog.push(newPosition);
-          console.log(
-            `The ${this.name} rover moved westward. position: r = ${this.position.r}, c = ${this.position.c}`
-          );
+          if (this.planet.board[0][this.position.c - 1].o === false) {
+            this.position.c--;
+            const newPosition = { r: this.position.r, c: this.position.c };
+            this.travelLog.push(newPosition);
+            console.log(
+              `The ${this.name} rover moved westward. position: r = ${this.position.r}, c = ${this.position.c}`
+            );
+          } else {
+            console.log(
+              `The ${this.name} rover found a obstacle ahead at r = ${
+                this.planet.board[0][this.position.c + 1].r
+              }, c = ${
+                this.planet.board[0][this.position.c + 1].c
+              } and can't move on. ${this.name}'s position: r = ${
+                this.position.r
+              }, c = ${this.position.c}`
+            );
+          }
         } else {
           console.log(
             `The ${this.name} rover didn't move westward. position: r = ${this.position.r}, c = ${this.position.c} ${this.msg.outOfBoundsMsg}`
@@ -163,7 +190,9 @@ class Rover {
         }
         break;
       case 'S':
+        // check border
         if (this.position.r + 1 < this.planet.board.length) {
+          // check obstacle property value in rows
           if (this.planet.board[this.position.r + 1][0].o === false) {
             this.position.r++;
             const newPosition = { r: this.position.r, c: this.position.c };
@@ -173,7 +202,13 @@ class Rover {
             );
           } else {
             console.log(
-              `The ${this.name} rover found a obstacle and can't move on. position: r = ${this.position.r}, c = ${this.position.c}`
+              `The ${this.name} rover found a obstacle ahead at r = ${
+                this.planet.board[0][this.position.c + 1].r
+              }, c = ${
+                this.planet.board[0][this.position.c + 1].c
+              } and can't move on. ${this.name}'s position: r = ${
+                this.position.r
+              }, c = ${this.position.c}`
             );
           }
         } else {
@@ -183,13 +218,27 @@ class Rover {
         }
         break;
       case 'E':
+        // check border
         if (this.position.c + 1 < this.planet.board[0].length) {
-          this.position.c++;
-          const newPosition = { r: this.position.r, c: this.position.c };
-          this.travelLog.push(newPosition);
-          console.log(
-            `The ${this.name} rover moved eastward. position: r = ${this.position.r}, c = ${this.position.c}`
-          );
+          // check obstacle property value in columns
+          if (this.planet.board[0][this.position.c + 1].o === false) {
+            this.position.c++;
+            const newPosition = { r: this.position.r, c: this.position.c };
+            this.travelLog.push(newPosition);
+            console.log(
+              `The ${this.name} rover moved eastward. position: r = ${this.position.r}, c = ${this.position.c}`
+            );
+          } else {
+            console.log(
+              `The ${this.name} rover found a obstacle ahead at r = ${
+                this.planet.board[0][this.position.c + 1].r
+              }, c = ${
+                this.planet.board[0][this.position.c + 1].c
+              } and can't move on. ${this.name}'s position: r = ${
+                this.position.r
+              }, c = ${this.position.c}`
+            );
+          }
         } else {
           console.log(
             `The ${this.name} rover didn't move eastward. position: r = ${this.position.r}, c = ${this.position.c} ${this.msg.outOfBoundsMsg}`
@@ -199,61 +248,19 @@ class Rover {
     }
   }
 
-  _moveBackward() {
-    switch (this._direction) {
+  _moveBackward(cardinalDirection) {
+    switch (cardinalDirection) {
       case 'N':
-        if (this.position.r + 1 < this.planet.board.length) {
-          this.position.r++;
-          const newPosition = { r: this.position.r, c: this.position.c };
-          this.travelLog.push(newPosition);
-          console.log(
-            `The ${this.name} rover moved, in reverse, southward. position: r = ${this.position.r}, c = ${this.position.c}`
-          );
-        } else {
-          `The ${this.name} rover couldn't go further. position: r = ${this.position.r}, c = ${this.position.c} ${this.msg.outOfBoundsMsg}`;
-        }
+        this._moveFoward('S');
         break;
       case 'W':
-        if (this.position.c + 1 < this.planet.board[0].length) {
-          this.position.c++;
-          const newPosition = { r: this.position.r, c: this.position.c };
-          this.travelLog.push(newPosition);
-          console.log(
-            `The ${this.name} rover moved, in reverse, eastward. position: r = ${this.position.r}, c = ${this.position.c}`
-          );
-        } else {
-          console.log(
-            `The ${this.name} rover couldn't go further. position: r = ${this.position.r}, c = ${this.position.c} ${this.msg.outOfBoundsMsg}`
-          );
-        }
+        this._moveFoward('E')
         break;
       case 'S':
-        if (this.position.r - 1 >= 0) {
-          this.position.r--;
-          const newPosition = { r: this.position.r, c: this.position.c };
-          this.travelLog.push(newPosition);
-          console.log(
-            `The ${this.name} rover moved, in reverse, northward. position: r = ${this.position.r}, c = ${this.position.c}`
-          );
-        } else {
-          console.log(
-            `The ${this.name} rover couldn't go further. position: r = ${this.position.r}, c = ${this.position.c} ${this.msg.outOfBoundsMsg}`
-          );
-        }
+        this._moveFoward('N');
         break;
       case 'E':
-        if (this.position.c - 1 >= 0) {
-          this.position.c--;
-          const newPosition = { r: this.position.r, c: this.position.c };
-          this.travelLog.push(newPosition);
-          console.log(
-            `The ${this.name} rover moved, in reverse, westward. position: r = ${this.position.r}, c = ${this.position.c}`
-          );
-        } else {
-          console.log(
-            `The ${this.name} rover couldn't go further. position: r = ${this.position.r}, c = ${this.position.c} ${this.msg.outOfBoundsMsg}`
-          );
-        }
+        this._moveFoward('W');
         break;
     }
   }

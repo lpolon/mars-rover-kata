@@ -2,21 +2,19 @@
 
 const Planet = require('./Planet');
 const Rover = require('./Rover');
-// const helper = require('./helper');
-
+const options = require('./options');
 // game options
-const options = {
-  outOfBoundsMsg: '\n YOU MUST GATHER YOUR PARTY BEFORE VENTURING FORTH',
-  blockBadInputs: false, // false: invalid inputs are skipped and logged. true: ._parseInput() throws error
-};
 
 const mars = new Planet('Mars', 3, 3, 0);
 const curiosity = new Rover('Curiosity', mars, options);
 console.log('>');
+console.log(new Date().toLocaleString());
+
+// console.log(curiosity);
 
 console.log('mars.board: \n',mars.board);
 console.log('curiosity.position: \n',curiosity.position);
-curiosity.inputCommands('rffff');
+curiosity.inputCommands('brfflf');
 console.log(curiosity.travelLog);
 
-console.log(new Date().toLocaleString());
+module.exports = options;

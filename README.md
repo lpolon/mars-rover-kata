@@ -28,12 +28,13 @@ leia-me tem orientacoes de obstaculos no Planet, mas ainda nao esta funcionando!
 
 # H2 to-do:
 - bonus 4: obstáculos
-  - colocar identificacao de obstaculos nas funcoes foward e backward
-  - melhorar validacao de input da probabilidade
+- make rover be deployed in random position
+  - melhorar validacao de input da probabilidade. Atual: 2 digitos. Nada impede outros valores.
 - bonus 4: other rovers // 
 - getters interessantes. p.ex.: status, ou um travel log mais legal..
 
+# H2 bugs:
+- The rover might be 'deployed' over an obstacle and it is ignored.
+
 method ._checkColision()
 how to make many players move at the same time?
-
-# H3 anotacoes temp
