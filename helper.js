@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 const options = require('./options');
 
 const helper = {
@@ -5,7 +6,6 @@ const helper = {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   },
   stringPathBlock(cardinalDirection, roverName, roverRow, roverColumn) {
-    // eslint-disable-next-line default-case
     switch (cardinalDirection) {
       case 'N':
         return `The ${roverName} rover didn't move northward. position: r = ${roverRow}, c = ${roverColumn} ${options.outOfBoundsMsg}`;
@@ -17,8 +17,7 @@ const helper = {
         return `The ${roverName} rover didn't move eastward. position: r = ${roverRow}, c = ${roverColumn} ${options.outOfBoundsMsg}`;
     }
   },
-  stringMovement(cardinalDirection, roverName, roverRow, roverColumn) {
-    // eslint-disable-next-line default-case
+  stringMove(cardinalDirection, roverName, roverRow, roverColumn) {
     switch (cardinalDirection) {
       case 'N':
         return `The ${roverName} rover moved northward. position: r = ${roverRow}, c = ${roverColumn}`;
@@ -30,7 +29,7 @@ const helper = {
         return `The ${roverName} rover moved eastward. position: r = ${roverRow}, c = ${roverColumn}`;
     }
   },
-  stringMovementReverse(cardinalDirection, roverName, roverRow, roverColumn)) {
+  stringMoveReverse(cardinalDirection, roverName, roverRow, roverColumn) {
     switch (cardinalDirection) {
       case 'N':
         return `The ${roverName} rover moved northward in reverse. position: r = ${roverRow}, c = ${roverColumn}`;
@@ -43,8 +42,15 @@ const helper = {
     }
   },
 
-  stringObstacle(roverName, obstaclePositionRow, obstaclePositionColumn, roverRow, roverColumn)
-  return `The ${roverName} rover found a obstacle ahead at r = ${obstaclePositionRow}, c = ${obstaclePositionColumn} and can't move on. ${roverName}'s position: r = ${roverRow}, c = ${roverColumn}`
+  stringObstacle(
+    roverName,
+    obstaclePositionRow,
+    obstaclePositionColumn,
+    roverRow,
+    roverColumn
+  ) {
+    return `The ${roverName} rover found a obstacle ahead at r = ${obstaclePositionRow}, c = ${obstaclePositionColumn} and can't move on. ${roverName}'s position: r = ${roverRow}, c = ${roverColumn}`;
+  },
 };
 
 module.exports = helper;

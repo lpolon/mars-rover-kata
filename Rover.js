@@ -138,13 +138,13 @@ class Rover {
   _moveFoward(cardinalDirection) {
     switch (cardinalDirection) {
       case 'N':
-        if (this.position.r - 1 > 0) {
+        if (this.position.r - 1 >= 0) {
           if (this.planet.board[this.position.r - 1][0].o === false) {
             this.position.r--;
             const newPosition = { r: this.position.r, c: this.position.c };
             this.travelLog.push(newPosition);
             console.log(
-              `The ${this.name} rover moved northward. position: r = ${this.position.r}, c = ${this.position.c}`
+              helper.stringMove(cardinalDirection, this.name, this.position.r, this.position.c),
             );
           } else {
             console.log(
@@ -170,7 +170,7 @@ class Rover {
             const newPosition = { r: this.position.r, c: this.position.c };
             this.travelLog.push(newPosition);
             console.log(
-              `The ${this.name} rover moved westward. position: r = ${this.position.r}, c = ${this.position.c}`
+              helper.stringMove(cardinalDirection, this.name, this.position.r, this.position.c),
             );
           } else {
             console.log(
@@ -198,7 +198,7 @@ class Rover {
             const newPosition = { r: this.position.r, c: this.position.c };
             this.travelLog.push(newPosition);
             console.log(
-              `The ${this.name} rover moved southward. position: r = ${this.position.r}, c = ${this.position.c}`
+              helper.stringMove(cardinalDirection, this.name, this.position.r, this.position.c),
             );
           } else {
             console.log(
@@ -226,7 +226,7 @@ class Rover {
             const newPosition = { r: this.position.r, c: this.position.c };
             this.travelLog.push(newPosition);
             console.log(
-              `The ${this.name} rover moved eastward. position: r = ${this.position.r}, c = ${this.position.c}`
+              helper.stringMove(cardinalDirection, this.name, this.position.r, this.position.c),
             );
           } else {
             console.log(
