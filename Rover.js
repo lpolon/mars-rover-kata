@@ -12,6 +12,7 @@ class Rover {
   constructor(name, planet, msg) {
     this.name = name;
     this._direction = 'N'; // there is a setter to change this property
+    // choose a random position to deploy:
     this.position = { r: 0, c: 0 };
     this.travelLog = [{ r: 0, c: 0 }];
     this.planet = planet;
