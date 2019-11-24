@@ -1,37 +1,29 @@
 # mars-rover-kata
 
-# H1 como usar:
-1) crie o seu tabuleiro declarando uma nova instancia de objeto.
-new Planet( string com nome da sonda, quantidade de linhas, quantidade de colunas, probabilidade de obstaculos - numero de 0 a 100 );
-p. ex.:
-const mars = new Planet( 'mars', 10, 10, 30 )
+# H1 how to "play"
+1) in build.js: create your planet (board) declaring a new object instance:
+new Planet( [Probe name as string], [number of board's row], [number of board's columns], [probability of obstacle as a two-digit integer] )
+for instance:
+`const mars = new Planet( 'mars', 10, 10, 30 )`
 
-2) crie sua sonda com o nome da sonda (string) e o planeta em que ela esta (objeto).
-p. ex.:
-const curiosity = new Rover( 'curiosity', mars )
+2) create your rover (player) declaring a new object instance and game options.
+for instace:
+`const curiosity = new Rover ('curiosity', mars, options)`
 
-3) mova sua sonda usando: [rover-name].inputcommands();
-inputs validos: f, b, r, l. podem ser passados como:
-a) 'ffffbbb'
-b) 'f', 'b', 'r', ...
-ou qualquer combinacao das duas
-
-# H2 Intro
-Eu tentei organizar sempre pensando em como tornar o código reutilizável e fácil de entender. Tentei utilizar as coisas que eu aprendi no material da Ironhack e também no que eu já tinha estudado pelo codeAcademy. Por favor, não deixem de me explicar o que não faz sentido na forma de organizar, maus hábitos, etc... Obrigado!
-
-
+3) move your rover with the `.inputCommands()` method:
+for instance:
+`curiosity.inputCommands('rfffbbfffrfflfbll', 'f', 'r')`
 
 # H1 status:
-iterações de 1 até 5 concluídas.
-bonus de 1 até 3 concluídas.
-leia-me tem orientacoes de obstaculos no Planet, mas ainda nao esta funcionando!
+1 to 5 iterations - done.
+1 to 4a challenges - done.
 
 # H2 to-do:
-- bonus 4: obstáculos
-  - colocar identificacao de obstaculos nas funcoes foward e backward
-  - melhorar validacao de input da probabilidade
-- bonus 4: other rovers // 
-- getters interessantes. p.ex.: status, ou um travel log mais legal..
+- make rover be deployed in random position
+- bonus 4b: other rovers // 
+- improve parsion of probability validation.
+- getter for more interesting logs.
+- render an actual board with an path.
 
-method ._checkColision()
-how to make many players move at the same time?
+# H2 bugs:
+- The rover might be 'deployed' over an obstacle and it is ignored.

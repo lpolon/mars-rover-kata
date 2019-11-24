@@ -34,7 +34,7 @@ class Planet {
         }
         board.push(rowArr);
       }
-      return board;
+      return board; // testar se isso quebrou os outros inputs.
     };
     this.board = createBoard(numOfRows, numOfColumns);
     this.name = name;
