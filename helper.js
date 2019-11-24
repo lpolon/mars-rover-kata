@@ -51,6 +51,20 @@ const helper = {
   ) {
     return `The ${roverName} rover found a obstacle ahead at r = ${obstaclePositionRow}, c = ${obstaclePositionColumn} and can't move on. ${roverName}'s position: r = ${roverRow}, c = ${roverColumn}`;
   },
+
+  checkGearToLogMove(gear, cardinalDirection, name, roverRow, roverColumn) {
+    if (gear === 'f') {
+      console.log(
+        this.stringMove(cardinalDirection, name, roverRow, roverColumn)
+      );
+    } else if (gear === 'r') {
+      console.log(
+        this.stringMoveReverse(cardinalDirection, name, roverRow, roverColumn)
+      );
+    } else {
+      return 'gear is not "r" or "f" and this line should never happen';
+    }
+  }
 };
 
 module.exports = helper;

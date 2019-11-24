@@ -50,7 +50,7 @@ class Rover {
         return flattenedNewInputArr;
       } else {
         console.log(
-          `one or more inputs for .move() are invalid. Please only pass strings or objects with the values: ${[
+          `one or more inputs for .inputCommand() are invalid. Please only pass strings or objects with the values: ${[
             'f',
             'b',
             'l',
@@ -83,9 +83,9 @@ class Rover {
     parsedInputArr.forEach(e => {
       console.log('input: ' + e);
       if (e === 'f') {
-        this._moveFoward(this._direction);
+        this._moveFoward(this._direction, 'f');
       } else if (e === 'b') {
-        this._moveBackward(this._direction);
+        this._moveBackward(this._direction, 'r');
       } else if (e === 'l') {
         this._turnLeft();
       } else if (e === 'r') {
@@ -135,132 +135,116 @@ class Rover {
     );
   }
 
-  _moveFoward(cardinalDirection) {
+  _moveN(cardinalDirection, gear) {
+    if (this.position.r - 1 >= 0) {
+      const nextPositionOnPlanet = this.planet.board[this.position.r - 1][0];
+      if (nextPositionOnPlanet.o === false) {
+        this.position.r--;
+        const newPosition = { r: this.position.r, c: this.position.c };
+        this.travelLog.push(newPosition);
+        helper.checkGearToLogMove(gear, cardinalDirection, this.name, this.position.r, this.position.c);
+      } else {
+        console.log(
+          helper.stringObstacle(this.name, nextPositionOnPlanet.r, nextPositionOnPlanet.c, this.position.r, this.position.c),
+        );
+      }
+    } else {
+      console.log(
+        helper.stringPathBlock(cardinalDirection, this.name, this.position.r, this.position.c),
+      );
+    }
+  }
+
+  _moveW(cardinalDirection, gear) {
+    if (this.position.c - 1 >= 0) {
+      const nextPositionOnPlanet = this.planet.board[0][this.position.c - 1];
+      if (nextPositionOnPlanet.o === false) {
+        this.position.c--;
+        const newPosition = { r: this.position.r, c: this.position.c };
+        this.travelLog.push(newPosition);
+        helper.checkGearToLogMove(gear, cardinalDirection, this.name, this.position.r, this.position.c);
+      } else {
+        console.log(
+          helper.stringObstacle(this.name, nextPositionOnPlanet.r, nextPositionOnPlanet.c, this.position.r, this.position.c),
+        );
+      }
+    } else {
+      console.log(
+        helper.stringPathBlock(cardinalDirection, this.name, this.position.r, this.position.c)
+      );
+    }
+  }
+
+  _moveS(cardinalDirection, gear) {
+    if (this.position.r + 1 < this.planet.board.length) {
+      const nextPositionOnPlanet = this.planet.board[this.position.r + 1][0];
+      if (nextPositionOnPlanet.o === false) {
+        this.position.r++;
+        const newPosition = { r: this.position.r, c: this.position.c };
+        this.travelLog.push(newPosition);
+        helper.checkGearToLogMove(gear, cardinalDirection, this.name, this.position.r, this.position.c);
+      } else {
+        console.log(
+          helper.stringObstacle(this.name, nextPositionOnPlanet.r, nextPositionOnPlanet.c, this.position.r, this.position.c),
+        );
+      }
+    } else {
+      console.log(
+        helper.stringPathBlock(cardinalDirection, this.name, this.position.r, this.position.c),
+      );
+    }
+  }
+
+  _moveE(cardinalDirection, gear) {
+    if (this.position.c + 1 < this.planet.board[0].length) {
+      const nextPositionOnPlanet = this.planet.board[0][this.position.c + 1];
+      if (nextPositionOnPlanet.o === false) {
+        this.position.c++;
+        const newPosition = { r: this.position.r, c: this.position.c };
+        this.travelLog.push(newPosition);
+        helper.checkGearToLogMove(gear, cardinalDirection, this.name, this.position.r, this.position.c);
+      } else {
+        console.log(
+          helper.stringObstacle(this.name, nextPositionOnPlanet.r, nextPositionOnPlanet.c, this.position.r, this.position.c),
+        );
+      }
+    } else {
+      console.log(
+        helper.stringPathBlock(cardinalDirection, this.name, this.position.r, this.position.c),
+      );
+    }
+  }
+
+  _moveFoward(cardinalDirection, gear) {
     switch (cardinalDirection) {
       case 'N':
-        if (this.position.r - 1 >= 0) {
-          if (this.planet.board[this.position.r - 1][0].o === false) {
-            this.position.r--;
-            const newPosition = { r: this.position.r, c: this.position.c };
-            this.travelLog.push(newPosition);
-            console.log(
-              helper.stringMove(cardinalDirection, this.name, this.position.r, this.position.c),
-            );
-          } else {
-            console.log(
-              `The ${this.name} rover found a obstacle ahead at r = ${
-                this.planet.board[0][this.position.c + 1].r
-              }, c = ${
-                this.planet.board[0][this.position.c + 1].c
-              } and can't move on. ${this.name}'s position: r = ${
-                this.position.r
-              }, c = ${this.position.c}`
-            );
-          }
-        } else {
-          console.log(
-            helper.logPathBlock(cardinalDirection, this.name, this.position.r, this.position.c)
-          );
-        }
+        this._moveN('N', gear);
         break;
       case 'W':
-        if (this.position.c - 1 >= 0) {
-          if (this.planet.board[0][this.position.c - 1].o === false) {
-            this.position.c--;
-            const newPosition = { r: this.position.r, c: this.position.c };
-            this.travelLog.push(newPosition);
-            console.log(
-              helper.stringMove(cardinalDirection, this.name, this.position.r, this.position.c),
-            );
-          } else {
-            console.log(
-              `The ${this.name} rover found a obstacle ahead at r = ${
-                this.planet.board[0][this.position.c + 1].r
-              }, c = ${
-                this.planet.board[0][this.position.c + 1].c
-              } and can't move on. ${this.name}'s position: r = ${
-                this.position.r
-              }, c = ${this.position.c}`
-            );
-          }
-        } else {
-          console.log(
-            `The ${this.name} rover didn't move westward. position: r = ${this.position.r}, c = ${this.position.c} ${this.msg.outOfBoundsMsg}`
-          );
-        }
+        this._moveW('W', gear);
         break;
       case 'S':
-        // check border
-        if (this.position.r + 1 < this.planet.board.length) {
-          // check obstacle property value in rows
-          if (this.planet.board[this.position.r + 1][0].o === false) {
-            this.position.r++;
-            const newPosition = { r: this.position.r, c: this.position.c };
-            this.travelLog.push(newPosition);
-            console.log(
-              helper.stringMove(cardinalDirection, this.name, this.position.r, this.position.c),
-            );
-          } else {
-            console.log(
-              `The ${this.name} rover found a obstacle ahead at r = ${
-                this.planet.board[0][this.position.c + 1].r
-              }, c = ${
-                this.planet.board[0][this.position.c + 1].c
-              } and can't move on. ${this.name}'s position: r = ${
-                this.position.r
-              }, c = ${this.position.c}`
-            );
-          }
-        } else {
-          console.log(
-            `The ${this.name} rover didn't move southward. position: r = ${this.position.r}, c = ${this.position.c} ${this.msg.outOfBoundsMsg}`
-          );
-        }
+        this._moveS('S', gear);
         break;
       case 'E':
-        // check border
-        if (this.position.c + 1 < this.planet.board[0].length) {
-          // check obstacle property value in columns
-          if (this.planet.board[0][this.position.c + 1].o === false) {
-            this.position.c++;
-            const newPosition = { r: this.position.r, c: this.position.c };
-            this.travelLog.push(newPosition);
-            console.log(
-              helper.stringMove(cardinalDirection, this.name, this.position.r, this.position.c),
-            );
-          } else {
-            console.log(
-              `The ${this.name} rover found a obstacle ahead at r = ${
-                this.planet.board[0][this.position.c + 1].r
-              }, c = ${
-                this.planet.board[0][this.position.c + 1].c
-              } and can't move on. ${this.name}'s position: r = ${
-                this.position.r
-              }, c = ${this.position.c}`
-            );
-          }
-        } else {
-          console.log(
-            `The ${this.name} rover didn't move eastward. position: r = ${this.position.r}, c = ${this.position.c} ${this.msg.outOfBoundsMsg}`
-          );
-        }
+        this._moveE('E', gear);
         break;
     }
   }
 
-  _moveBackward(cardinalDirection) {
+  _moveBackward(cardinalDirection, gear) {
     switch (cardinalDirection) {
       case 'N':
-        this._moveFoward('S');
+        this._moveS('S', gear);
         break;
       case 'W':
-        this._moveFoward('E')
+        this._moveE('E', gear);
         break;
       case 'S':
-        this._moveFoward('N');
+        this._moveN('N', gear);
         break;
       case 'E':
-        this._moveFoward('W');
+        this._moveW('W', gear);
         break;
     }
   }
